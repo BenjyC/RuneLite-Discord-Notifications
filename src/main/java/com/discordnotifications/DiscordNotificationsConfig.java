@@ -279,7 +279,9 @@ public interface DiscordNotificationsConfig extends Config {
 	default boolean sendPetScreenshot() {
 		return false;
 	}
+	// End of pet config section
 
+	// Collection log config section
 	@ConfigSection(
 		name = "Collection logs",
 		description = "The config for collection logs",
@@ -316,11 +318,13 @@ public interface DiscordNotificationsConfig extends Config {
 	default boolean sendCollectionLogScreenshot() {
 		return false;
 	}
+	// End of collection log config section
 
+	// Combat achievement config section
 	@ConfigSection(
 		name = "Combat Achievements",
 		description = "The config for combat achievements",
-		position = 6,
+		position = 7,
 		closedByDefault = true
 	)
 	String combatAchievementsConfig = "combatAchievementsConfig";
@@ -353,4 +357,66 @@ public interface DiscordNotificationsConfig extends Config {
 	default boolean sendCombatAchievementsScreenshot() {
 		return false;
 	}
+	// End of combat achievement config section
+
+	// Ground items config section
+	@ConfigSection(
+			name = "Ground Items",
+			description = "The config for ground items",
+			position = 8,
+			closedByDefault = true
+	)
+	String groundItemsConfig = "groundItemsConfig";
+
+	@ConfigItem(
+			keyName = "includeGroundItems",
+			name = "Send Ground Item Notifications",
+			description = "Send messages when you receive specific items as drops.",
+			section = groundItemsConfig,
+			position = 0
+	)
+	default boolean includeGroundItems() {
+		return false;
+	}
+
+	@ConfigItem(
+			keyName = "useAltWebhook",
+			name = "Use Separate Webhook",
+			description = "Enable the use of an alternative Webhook URL if using for a clan bingo",
+			section = groundItemsConfig,
+			position = 1
+	)
+	default boolean useAltWebhook() {
+		return false;
+	}
+
+	@ConfigItem(
+			keyName = "groundItemsWebhook",
+			name = "Ground Item Webhook URL(s)",
+			description = "The Discord Webhook URL(s) to send messages to, separated by a newline.",
+			section = groundItemsConfig,
+			position = 2
+	)
+	String webhookGroundItems();
+
+	@ConfigItem(
+			keyName = "groundItemsMessage",
+			name = "Ground Items Message",
+			description = "Message to send to Discord on receiving specific items as drops.",
+			section = groundItemsConfig,
+			position = 3
+	)
+	default String groundItemsMessage() { return "$name has just received a drop!"; }
+
+	@ConfigItem(
+			keyName = "sendGroundItemsScreenshot",
+			name = "Include Ground Item screenshots",
+			description = "Include a screenshot when you receive specific items as drops.",
+			section = groundItemsConfig,
+			position = 100
+	)
+	default boolean sendGroundItemsScreenshot() {
+		return false;
+	}
+
 }
